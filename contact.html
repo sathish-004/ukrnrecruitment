@@ -317,22 +317,26 @@ footer{background:var(--ink);padding:64px 0 32px;}
           <div id="fbody">
             <div class="fbt">Submit Application</div>
             <p class="fbs">All fields marked <span style="color:var(--red)">*</span> are required.</p>
-            <form id="form" novalidate>
+            <form id="form" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" novalidate>
+              <input type="hidden" name="access_key" value="01d4e0c6-34f6-4169-99c5-21c760bd5ed9">
+              <input type="hidden" name="subject" value="New Nursing Application - UK RN Recruitment">
+              <input type="hidden" name="from_name" value="UK RN Recruitment Website">
+
               <div class="frow">
-                <div class="fg2"><label class="fl" for="fn">Full Name <span>*</span></label><input class="fi" type="text" id="fn" placeholder="Jane Smith"/><div class="fer" id="fn-e">⚠ Name required.</div></div>
-                <div class="fg2"><label class="fl" for="em">Email <span>*</span></label><input class="fi" type="email" id="em" placeholder="jane@email.com"/><div class="fer" id="em-e">⚠ Valid email required.</div></div>
+                <div class="fg2"><label class="fl" for="fn">Full Name <span>*</span></label><input class="fi" type="text" id="fn" name="full_name" placeholder="Jane Smith"/><div class="fer" id="fn-e">⚠ Name required.</div></div>
+                <div class="fg2"><label class="fl" for="em">Email <span>*</span></label><input class="fi" type="email" id="em" name="email" placeholder="jane@email.com"/><div class="fer" id="em-e">⚠ Valid email required.</div></div>
               </div>
               <div class="frow">
-                <div class="fg2"><label class="fl" for="ph">Phone <span>*</span></label><input class="fi" type="tel" id="ph" placeholder="+44 7700 000000"/><div class="fer" id="ph-e">⚠ Phone required.</div></div>
-                <div class="fg2"><label class="fl" for="ql">Qualification <span>*</span></label><select class="fs" id="ql"><option value="">Select...</option><option>RGN – Registered General Nurse</option><option>RMN – Mental Health Nurse</option><option>RCN – Children's Nurse</option><option>RNLD – Learning Disabilities</option><option>Other</option></select><div class="fer" id="ql-e">⚠ Please select.</div></div>
+                <div class="fg2"><label class="fl" for="ph">Phone <span>*</span></label><input class="fi" type="tel" id="ph" name="phone" placeholder="+44 7700 000000"/><div class="fer" id="ph-e">⚠ Phone required.</div></div>
+                <div class="fg2"><label class="fl" for="ql">Qualification <span>*</span></label><select class="fs" id="ql" name="qualification"><option value="">Select...</option><option>RGN – Registered General Nurse</option><option>RMN – Mental Health Nurse</option><option>RCN – Children's Nurse</option><option>RNLD – Learning Disabilities</option><option>Other</option></select><div class="fer" id="ql-e">⚠ Please select.</div></div>
               </div>
-              <div class="fg2"><label class="fl" for="ex">Experience Level <span>*</span></label><select class="fs" id="ex"><option value="">Select experience...</option><option>Newly Qualified (0–1 year)</option><option>1–3 Years</option><option>3–5 Years</option><option>5–10 Years</option><option>10+ Years</option></select><div class="fer" id="ex-e">⚠ Please select.</div></div>
+              <div class="fg2"><label class="fl" for="ex">Experience Level <span>*</span></label><select class="fs" id="ex" name="experience"><option value="">Select experience...</option><option>Newly Qualified (0–1 year)</option><option>1–3 Years</option><option>3–5 Years</option><option>5–10 Years</option><option>10+ Years</option></select><div class="fer" id="ex-e">⚠ Please select.</div></div>
               <div class="fg2">
-                <label class="fl">Upload CV <span>*</span></label>
-                <div class="dz" id="dropz"><div class="dzic">📄</div><div class="dztx"><strong>Click to upload</strong> or drag &amp; drop</div><div class="dzh">PDF, DOC, DOCX — Max 5MB</div><input type="file" id="cv" accept=".pdf,.doc,.docx"/></div>
+                <label class="fl">Upload CV</label>
+                <div class="dz" id="dropz"><div class="dzic">📄</div><div class="dztx"><strong>Click to upload</strong> or drag &amp; drop</div><div class="dzh">PDF, DOC, DOCX — Max 5MB</div><input type="file" id="cv" name="attachment" accept=".pdf,.doc,.docx"/></div>
                 <div class="dzn" id="dzname"></div><div class="fer" id="cv-e">⚠ Please upload your CV.</div>
               </div>
-              <div class="fg2"><label class="fl" for="msg">Message</label><textarea class="fta" id="msg" placeholder="Tell us about your experience and career goals..."></textarea></div>
+              <div class="fg2"><label class="fl" for="msg">Message</label><textarea class="fta" id="msg" name="message" placeholder="Tell us about your experience and career goals..."></textarea></div>
               <button type="submit" class="sub" id="subBtn"><div class="spin"></div><span class="slb">Submit Application</span></button>
             </form>
           </div>
@@ -396,11 +400,34 @@ document.getElementById('form').addEventListener('submit',function(e){
   v('ph','ph-e',document.getElementById('ph').value.trim().length>6);
   v('ql','ql-e',document.getElementById('ql').value!=='');
   v('ex','ex-e',document.getElementById('ex').value!=='');
-  if(!cv.files[0]){document.getElementById('cv-e').classList.add('show');ok=false;}
-  else document.getElementById('cv-e').classList.remove('show');
+
   if(!ok)return;
   const btn=document.getElementById('subBtn');btn.classList.add('loading');btn.disabled=true;
-  setTimeout(()=>{document.getElementById('fbody').style.display='none';document.getElementById('sstate').classList.add('show');},1600);
+
+  const formData = new FormData(this);
+
+  fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+  })
+  .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+          document.getElementById('fbody').style.display='none';
+          document.getElementById('sstate').classList.add('show');
+      } else {
+          console.log(response);
+          alert(json.message);
+      }
+  })
+  .catch(error => {
+      console.log(error);
+      alert("Something went wrong!");
+  })
+  .then(function() {
+      btn.classList.remove('loading');
+      btn.disabled=false;
+  });
 });
 
 ['fn','em','ph','ql','ex'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',()=>{el.classList.remove('err');const er=document.getElementById(id+'-e');if(er)er.classList.remove('show');});});
