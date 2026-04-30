@@ -116,7 +116,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0;transition:all .4
 
 nav.scrolled{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid var(--border);box-shadow:var(--s-sm);}
 
-.nw{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nw{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:84px;}
 
 .brand{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--ink);}
 
@@ -1734,6 +1734,7 @@ footer{margin:0;padding:40px 0 0;display:block;background:var(--ink);flex-shrink
 
 .wa-panel{bottom:24px;right:24px;}
 
+@media(max-width:768px){ .nw .brand img { transform: scale(1.15) translateX(-10px) !important; } .ftg .brand img { width: 220px !important; } .ftg .brand { margin-top: -80px !important; margin-bottom: -40px !important; } }
 </style>
 
 </head>
@@ -1750,7 +1751,7 @@ footer{margin:0;padding:40px 0 0;display:block;background:var(--ink);flex-shrink
 
   <div class="nw">
 
-    <a href="index.html" class="brand"><img src="ukrn logo.png" alt="UK RN Recruitment" style="height:200px;width:auto;display:block;margin:0;padding-bottom:15px;"></a>
+    <a href="index.html" class="brand" style="padding-top:8px;padding-bottom:8px;margin-left:-24px;"><img src="ukrn logo.png" alt="UK RN Recruitment" style="height:200px;width:auto;display:block;margin:0;padding-bottom:15px;transform:scale(1.4);transform-origin:left center;"></a>
 
     <div class="nlinks">
 
@@ -2918,7 +2919,7 @@ footer{margin:0;padding:40px 0 0;display:block;background:var(--ink);flex-shrink
 
       <div>
 
-        <a href="index.html" class="brand" style="color:#fff;display:inline-block;margin-top:-24px;margin-bottom:16px;"><img src="ukrn logo.png" alt="UK RN Recruitment" style="height:auto;max-height:75px;width:auto;display:block;margin:0;padding:0;"></a>
+        <a href="index.html" class="brand" style="color:#fff;display:block;margin-top:-110px;margin-bottom:-60px;margin-left:-20px;"><img src="ukrn logo.png" alt="UK RN Recruitment" style="width:280px;height:auto;display:block;margin:0;padding:0;"></a>
 
         <p class="ftb">Premier healthcare recruitment agency connecting skilled nurses with life-changing opportunities across the UK and internationally.</p>
 
