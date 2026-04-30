@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact — UK RN Recruitment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700;800&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{margin:0;padding:0;min-height:100%;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface2:#F4F5F7;--surface3:#EDEEF1;
+  --ink:#0D0F12;--ink2:#1C2033;--muted:#6B7280;--muted2:#9CA3AF;
+  --border:#E5E7EB;--border2:#D1D5DB;
+  --blue:#1C6BFF;--blue-l:#EEF3FF;
+  --teal:#00A8A2;--teal-l:#E6F7F7;
+  --amber:#C17D0F;--amber-l:#FEF3DC;
+  --red:#DC2626;--green:#059669;
+  --s-xs:0 1px 2px rgba(0,0,0,.05);
+  --s-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --s-md:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04);
+  --s-lg:0 12px 40px rgba(0,0,0,.10),0 4px 12px rgba(0,0,0,.05);
+  --s-xl:0 24px 64px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.06);
+  --r:8px;--r2:12px;--r3:16px;--r4:24px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease2:cubic-bezier(.4,0,.2,1);
+}
+body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.6;font-weight:400;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{font-family:inherit;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0;transition:all .4s var(--ease2);background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--s-sm);}
+nav.scrolled{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid var(--border);box-shadow:var(--s-sm);}
+.nw{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--ink);}
+.bmark{width:34px;height:34px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.brand span{color:var(--blue);}
+.nlinks{display:flex;align-items:center;gap:2px;}
+.nlinks a{font-size:14px;font-weight:500;color:var(--muted);padding:7px 14px;border-radius:var(--r);transition:color .2s,background .2s;}
+.nlinks a:hover,.nlinks a.active{color:var(--ink);background:var(--surface2);}
+.btn-nav{background:var(--ink);color:#fff;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r);border:none;cursor:pointer;transition:all .25s var(--ease2);display:inline-flex;align-items:center;gap:6px;}
+.btn-nav:hover{background:var(--blue);transform:translateY(-1px);box-shadow:0 4px 16px rgba(28,107,255,.3);}
+.ham{display:none;flex-direction:column;gap:4.5px;background:none;border:none;cursor:pointer;padding:4px;}
+.ham span{display:block;width:20px;height:1.5px;background:var(--ink);border-radius:99px;transition:all .3s var(--ease);}
+.ham.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.ham.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.mob-menu{
+  position:fixed;inset:0;z-index:10001;
+  background:#fff;
+  display:flex;flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .45s var(--ease);
+  overflow-y:auto;
+}
+.mob-menu.open{transform:none;}
+.mob-header{
+  display:flex;align-items:center;justify-content:flex-end;
+  padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.mob-close{
+  width:36px;height:36px;border-radius:var(--r);background:var(--surface2);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;color:var(--ink);transition:all .2s;
+  line-height:1;
+}
+.mob-close:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.mob-nav-list{padding:16px 20px;flex:1;}
+.mob-nav-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;border-radius:var(--r2);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;
+  color:var(--ink);letter-spacing:-.01em;
+  border:1px solid transparent;
+  transition:all .25s var(--ease2);
+  margin-bottom:6px;
+  text-decoration:none;
+  opacity:0;transform:translateX(20px);
+}
+.mob-menu.open .mob-nav-item{opacity:1;transform:none;}
+.mob-menu.open .mob-nav-item:nth-child(1){transition-delay:.05s;transition-duration:.35s;}
+.mob-menu.open .mob-nav-item:nth-child(2){transition-delay:.10s;transition-duration:.35s;}
+.mob-menu.open .mob-nav-item:nth-child(3){transition-delay:.15s;transition-duration:.35s;}
+.mob-menu.open .mob-nav-item:nth-child(4){transition-delay:.20s;transition-duration:.35s;}
+.mob-nav-item .mob-arrow{
+  width:28px;height:28px;border-radius:var(--r);background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:var(--muted);transition:all .25s;
+}
+.mob-nav-item:hover{background:var(--surface2);border-color:var(--border);color:var(--blue);}
+.mob-nav-item:hover .mob-arrow{background:var(--blue);color:#fff;}
+.mob-footer{padding:20px;border-top:1px solid var(--border);flex-shrink:0;}
+.mob-footer .btn{width:100%;justify-content:center;font-size:15px;padding:14px;}
+
+/* UTILS */
+.c{max-width:1280px;margin:0 auto;padding:0 24px;}
+.sec{padding:108px 0;}
+.sec.alt{background:var(--surface2);}
+.ew{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+.sh{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,3.8vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin-bottom:16px;}
+.sh span{color:var(--blue);}
+.sd{font-size:16px;color:var(--ink);line-height:1.75;max-width:560px;font-weight:500;}
+.hdr{margin-bottom:64px;}.hdr.center{text-align:center;}.hdr.center .sd{margin:0 auto;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Geist',sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:var(--r);border:none;cursor:pointer;transition:all .25s var(--ease2);line-height:1;white-space:nowrap;}
+.bp{background:var(--blue);color:#fff;box-shadow:0 1px 2px rgba(28,107,255,.2);}
+.bp:hover{background:#1557E0;transform:translateY(-1px);box-shadow:0 6px 20px rgba(28,107,255,.35);}
+.bs{background:var(--surface);color:var(--ink);border:1px solid var(--border2);box-shadow:var(--s-xs);}
+.bs:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);box-shadow:var(--s-sm);}
+.bd{background:var(--ink);color:#fff;}
+.bd:hover{background:#1C2033;transform:translateY(-1px);box-shadow:0 6px 20px rgba(13,15,18,.3);}
+.btn-sm{padding:8px 16px;font-size:13px;}
+.btn-lg{padding:14px 28px;font-size:15px;}
+
+/* BADGES & TAGS */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:99px;}
+.bb{background:var(--blue-l);color:var(--blue);}
+.bt2{background:var(--teal-l);color:var(--teal);}
+.ba{background:var(--amber-l);color:var(--amber);}
+.br{background:#FEF2F2;color:var(--red);}
+.bg{background:#ECFDF5;color:var(--green);}
+.tag{font-size:12px;font-weight:500;padding:3px 10px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
+
+/* REVEAL */
+.rv{opacity:0;transition:opacity .7s var(--ease),transform .7s var(--ease);will-change:opacity,transform;}
+.rv.up{transform:translateY(28px);}.rv.lft{transform:translateX(-28px);}.rv.rgt{transform:translateX(28px);}.rv.sc{transform:scale(.97);}
+.rv.in{opacity:1;transform:none;}
+.d0{transition-delay:0s}.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* CONTACT */
+.cg{display:grid;grid-template-columns:1fr 1.6fr;gap:64px;align-items:start;}
+.cil{display:flex;flex-direction:column;gap:14px;margin-top:32px;}
+.ci{display:flex;gap:14px;align-items:center;padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);transition:all .25s;}
+.ci:hover{border-color:var(--blue);transform:translateX(4px);}
+.ciic{width:40px;height:40px;border-radius:var(--r);flex-shrink:0;background:var(--blue-l);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:17px;}
+.cilb{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.civl{font-size:14px;font-weight:600;color:var(--ink);}
+.fb{background:var(--surface);border:1px solid var(--border);border-radius:var(--r4);padding:40px;box-shadow:var(--s-xl);}
+.fbt{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:4px;}
+.fbs{font-size:14px;color:var(--muted);margin-bottom:28px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.fg2{margin-bottom:16px;}
+.fl{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px;}
+.fl span{color:var(--red);}
+.fi,.fs,.fta{width:100%;padding:11px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-family:'Geist',sans-serif;font-size:14px;color:var(--ink);outline:none;transition:all .25s var(--ease2);appearance:none;}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(28,107,255,.1);}
+.fi.err,.fs.err,.fta.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.1);}
+.fi::placeholder,.fta::placeholder{color:var(--muted2);}
+.fta{resize:vertical;min-height:96px;}
+.fer{font-size:12px;color:var(--red);margin-top:4px;display:none;align-items:center;gap:4px;}
+.fer.show{display:flex;}
+.dz{border:2px dashed var(--border2);border-radius:var(--r);padding:24px;text-align:center;cursor:pointer;background:var(--surface2);transition:all .25s;}
+.dz:hover,.dz.drag{border-color:var(--blue);background:var(--blue-l);}
+.dzic{font-size:26px;margin-bottom:8px;color:var(--muted2);}
+.dztx{font-size:14px;color:var(--muted);}
+.dztx strong{color:var(--blue);}
+.dzh{font-size:12px;color:var(--muted2);margin-top:4px;}
+.dzn{font-size:13px;font-weight:600;color:var(--teal);margin-top:8px;display:none;}
+.dzn.show{display:block;}
+.sub{width:100%;padding:14px;margin-top:8px;background:var(--ink);color:#fff;border:none;border-radius:var(--r);font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s var(--ease2);display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:-.01em;}
+.sub:hover{background:var(--blue);transform:translateY(-2px);box-shadow:0 8px 28px rgba(28,107,255,.3);}
+.spin{display:none;width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
+.sub.loading .spin{display:block;}
+.sub.loading .slb{display:none;}
+.sst{display:none;text-align:center;padding:48px 24px;}
+.sst.show{display:block;}
+.ssic{width:64px;height:64px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;font-size:28px;animation:bounceIn .5s var(--ease);}
+.sstit{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--ink);margin-bottom:8px;}
+.sssub{font-size:15px;color:var(--muted);}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes bounceIn{0%{transform:scale(0)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+/* FOOTER */
+footer{background:var(--ink);padding:64px 0 32px;}
+.ftg{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07);}
+.ftb{font-size:14px;color:rgba(255,255,255,.4);line-height:1.75;max-width:280px;margin-top:12px;}
+.fsoc{display:flex;gap:10px;margin-top:20px;}
+.soc{width:36px;height:36px;border-radius:var(--r);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:13px;transition:all .25s;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;}
+.soc:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+.fct{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:16px;}
+.fcl{display:flex;flex-direction:column;gap:10px;}
+.fcl a{font-size:14px;color:rgba(255,255,255,.45);transition:color .2s;}
+.fcl a:hover{color:rgba(255,255,255,.9);}
+.fbt2{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px 0;}
+.fbt2 p{font-size:13px;color:rgba(255,255,255,.3);}
+.fbl{display:flex;gap:20px;}
+.fbl a{font-size:13px;color:rgba(255,255,255,.3);transition:color .2s;}
+.fbl a:hover{color:rgba(255,255,255,.7);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .ftg{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:900px){
+  .cg{grid-template-columns:1fr;gap:40px;}
+}
+@media(max-width:768px){
+  .nlinks,.btn-nav{display:none;}
+  .ham{display:flex;}
+  .sec{padding:72px 0;}
+  .frow{grid-template-columns:1fr;}
+  .fb{padding:24px 18px;}
+  .ftg{grid-template-columns:1fr;gap:28px;}
+  .fbt2{flex-direction:column;text-align:center;}
+}
+@media(max-width:480px){
+  .ftg{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nw">
+    <a href="index.html" class="brand"><img src="ukrn logo.png" alt="UK RN Recruitment" style="height:200px;width:auto;display:block;margin:0;padding-bottom:15px;"></a>
+    <div class="nlinks">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="vacancies.html">Vacancies</a><a href="contact.html" class="active">Contact</a>
+    </div>
+    <a href="contact.html" class="btn-nav apply-btn">Apply Now</a>
+    <button class="ham" id="ham"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <div class="mob-header">
+    <button class="mob-close" id="mobClose">✕</button>
+  </div>
+  <div class="mob-nav-list">
+    <a href="index.html" class="mob-nav-item ml">
+      Home
+      <span class="mob-arrow">→</span>
+    </a>
+    <a href="about.html" class="mob-nav-item ml">
+      About Us
+      <span class="mob-arrow">→</span>
+    </a>
+    <a href="vacancies.html" class="mob-nav-item ml">
+      Vacancies
+      <span class="mob-arrow">→</span>
+    </a>
+    <a href="contact.html" class="mob-nav-item ml">
+      Contact
+      <span class="mob-arrow">→</span>
+    </a>
+  </div>
+  <div class="mob-footer">
+    <a href="contact.html" class="btn bp btn-lg apply-btn" style="width:100%;justify-content:center;">Apply Now →</a>
+  </div>
+</div>
+
+<section class="sec" id="contact" style="padding-top:140px;">
+  <div class="c">
+    <div class="hdr center"><div class="ew" style="font-size:14px;">Apply Now</div><h2 class="sh">Start Your <span>Healthcare Journey</span></h2><p class="sd">Fill in the form and our team will be in touch within 24 hours.</p></div>
+    <div class="cg">
+      <div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:8px;">We're Here to Help</h3>
+        <p class="sd">Whether newly qualified or a seasoned specialist, we have the perfect role for you — in the UK or internationally.</p>
+        <div class="cil">
+          <div class="ci"><div class="ciic">📞</div><div><div class="cilb">Call Us</div><div class="civl">+44 7454362823</div></div></div>
+          <div class="ci"><div class="ciic">✉️</div><div><div class="cilb">Email</div><div class="civl">info@ukrnrecruitment.co.uk</div></div></div>
+          <div class="ci"><div class="ciic">📍</div><div><div class="cilb">Office</div><div class="civl">66 Paul Street, London, United Kingdom, EC2A 4NA</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="fb">
+          <div id="fbody">
+            <div class="fbt">Submit Application</div>
+            <p class="fbs">All fields marked <span style="color:var(--red)">*</span> are required.</p>
+            <form id="form" novalidate>
+              <div class="frow">
+                <div class="fg2"><label class="fl" for="fn">Full Name <span>*</span></label><input class="fi" type="text" id="fn" placeholder="Jane Smith"/><div class="fer" id="fn-e">⚠ Name required.</div></div>
+                <div class="fg2"><label class="fl" for="em">Email <span>*</span></label><input class="fi" type="email" id="em" placeholder="jane@email.com"/><div class="fer" id="em-e">⚠ Valid email required.</div></div>
+              </div>
+              <div class="frow">
+                <div class="fg2"><label class="fl" for="ph">Phone <span>*</span></label><input class="fi" type="tel" id="ph" placeholder="+44 7700 000000"/><div class="fer" id="ph-e">⚠ Phone required.</div></div>
+                <div class="fg2"><label class="fl" for="ql">Qualification <span>*</span></label><select class="fs" id="ql"><option value="">Select...</option><option>RGN – Registered General Nurse</option><option>RMN – Mental Health Nurse</option><option>RCN – Children's Nurse</option><option>RNLD – Learning Disabilities</option><option>Other</option></select><div class="fer" id="ql-e">⚠ Please select.</div></div>
+              </div>
+              <div class="fg2"><label class="fl" for="ex">Experience Level <span>*</span></label><select class="fs" id="ex"><option value="">Select experience...</option><option>Newly Qualified (0–1 year)</option><option>1–3 Years</option><option>3–5 Years</option><option>5–10 Years</option><option>10+ Years</option></select><div class="fer" id="ex-e">⚠ Please select.</div></div>
+              <div class="fg2">
+                <label class="fl">Upload CV <span>*</span></label>
+                <div class="dz" id="dropz"><div class="dzic">📄</div><div class="dztx"><strong>Click to upload</strong> or drag &amp; drop</div><div class="dzh">PDF, DOC, DOCX — Max 5MB</div><input type="file" id="cv" accept=".pdf,.doc,.docx"/></div>
+                <div class="dzn" id="dzname"></div><div class="fer" id="cv-e">⚠ Please upload your CV.</div>
+              </div>
+              <div class="fg2"><label class="fl" for="msg">Message</label><textarea class="fta" id="msg" placeholder="Tell us about your experience and career goals..."></textarea></div>
+              <button type="submit" class="sub" id="subBtn"><div class="spin"></div><span class="slb">Submit Application</span></button>
+            </form>
+          </div>
+          <div class="sst" id="sstate"><div class="ssic">✅</div><div class="sstit">Application Received!</div><p class="sssub">Thank you for applying. Our team will review your application and be in touch within 24 hours.</p><a href="index.html" class="btn bp" style="margin-top:24px;">Back to Home</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="c">
+    <div class="ftg">
+      <div>
+        <a href="index.html" class="brand" style="color:#fff"><img src="ukrn logo.png" alt="UK RN Recruitment" style="height:150px;width:auto;display:block;margin:0;padding:0;"></a>
+        <p class="ftb">Premier healthcare recruitment agency connecting skilled nurses with life-changing opportunities across the UK and internationally.</p>
+        <div class="fsoc"><div class="soc">in</div><div class="soc">𝕏</div><div class="soc">f</div><div class="soc">ig</div></div>
+      </div>
+      <div><div class="fct">Company</div><div class="fcl"><a href="about.html">About Us</a><a href="index.html#why">Why Choose Us</a><a href="index.html#process">How It Works</a><a href="index.html#testimonials">Testimonials</a></div></div>
+      <div><div class="fct">For Nurses</div><div class="fcl"><a href="vacancies.html">View Vacancies</a><a href="contact.html">Apply Now</a><a href="#">Visa Support</a></div></div>
+      <div><div class="fct">Contact</div><div class="fcl"><a href="tel:+447454362823">+44 7454362823</a><a href="mailto:info@ukrnrecruitment.co.uk">info@ukrnrecruitment.co.uk</a><a href="#">66 Paul Street, London</a></div></div>
+  </div>
+</footer>
+
+<script>
+// NAV
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+
+// HAMBURGER
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+function closeMob(){mob.classList.remove('open');ham.classList.remove('open');document.body.style.overflow='';}
+ham.addEventListener('click',()=>{const o=mob.classList.toggle('open');ham.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
+document.getElementById('mobClose').addEventListener('click',closeMob);
+document.querySelectorAll('.ml,.mob-footer .btn').forEach(el=>el.addEventListener('click',closeMob));
+
+// REVEAL ANIMATIONS
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(el=>observer.observe(el));
+
+// FILE UPLOAD
+const dz=document.getElementById('dropz'),cv=document.getElementById('cv'),dzn=document.getElementById('dzname');
+dz.addEventListener('click',()=>cv.click());
+cv.addEventListener('change',()=>{if(cv.files[0]){dzn.textContent=' '+cv.files[0].name;dzn.classList.add('show');}});
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');const f=e.dataTransfer.files[0];if(f){cv.files=e.dataTransfer.files;dzn.textContent=' '+f.name;dzn.classList.add('show');}});
+
+// FORM
+document.getElementById('form').addEventListener('submit',function(e){
+  e.preventDefault();let ok=true;
+  const v=(id,eid,valid)=>{const el=document.getElementById(id),er=document.getElementById(eid);if(!valid){el.classList.add('err');er.classList.add('show');ok=false;}else{el.classList.remove('err');er.classList.remove('show');}};
+  v('fn','fn-e',document.getElementById('fn').value.trim().length>1);
+  v('em','em-e',/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('em').value.trim()));
+  v('ph','ph-e',document.getElementById('ph').value.trim().length>6);
+  v('ql','ql-e',document.getElementById('ql').value!=='');
+  v('ex','ex-e',document.getElementById('ex').value!=='');
+  if(!cv.files[0]){document.getElementById('cv-e').classList.add('show');ok=false;}
+  else document.getElementById('cv-e').classList.remove('show');
+  if(!ok)return;
+  const btn=document.getElementById('subBtn');btn.classList.add('loading');btn.disabled=true;
+  setTimeout(()=>{document.getElementById('fbody').style.display='none';document.getElementById('sstate').classList.add('show');},1600);
+});
+
+['fn','em','ph','ql','ex'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',()=>{el.classList.remove('err');const er=document.getElementById(id+'-e');if(er)er.classList.remove('show');});});
+</script>
+</body>
+</html>

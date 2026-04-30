@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Vacancies — UK RN Recruitment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700;800&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{margin:0;padding:0;min-height:100%;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface2:#F4F5F7;--surface3:#EDEEF1;
+  --ink:#0D0F12;--ink2:#1C2033;--muted:#6B7280;--muted2:#9CA3AF;
+  --border:#E5E7EB;--border2:#D1D5DB;
+  --blue:#1C6BFF;--blue-l:#EEF3FF;
+  --teal:#00A8A2;--teal-l:#E6F7F7;
+  --amber:#C17D0F;--amber-l:#FEF3DC;
+  --red:#DC2626;--green:#059669;
+  --s-xs:0 1px 2px rgba(0,0,0,.05);
+  --s-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --s-md:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04);
+  --s-lg:0 12px 40px rgba(0,0,0,.10),0 4px 12px rgba(0,0,0,.05);
+  --s-xl:0 24px 64px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.06);
+  --r:8px;--r2:12px;--r3:16px;--r4:24px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease2:cubic-bezier(.4,0,.2,1);
+}
+body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.6;font-weight:400;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{font-family:inherit;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0;transition:all .4s var(--ease2);background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--s-sm);}
+nav.scrolled{background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid var(--border);box-shadow:var(--s-sm);}
+.nw{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--ink);}
+.bmark{width:34px;height:34px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.brand span{color:var(--blue);}
+.nlinks{display:flex;align-items:center;gap:2px;}
+.nlinks a{font-size:14px;font-weight:500;color:var(--muted);padding:7px 14px;border-radius:var(--r);transition:color .2s,background .2s;}
+.nlinks a:hover,.nlinks a.active{color:var(--ink);background:var(--surface2);}
+.btn-nav{background:var(--ink);color:#fff;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r);border:none;cursor:pointer;transition:all .25s var(--ease2);display:inline-flex;align-items:center;gap:6px;}
+.btn-nav:hover{background:var(--blue);transform:translateY(-1px);box-shadow:0 4px 16px rgba(28,107,255,.3);}
+.ham{display:none;flex-direction:column;gap:4.5px;background:none;border:none;cursor:pointer;padding:4px;}
+.ham span{display:block;width:20px;height:1.5px;background:var(--ink);border-radius:99px;transition:all .3s var(--ease);}
+.ham.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.ham.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.mob-menu{
+  position:fixed;inset:0;z-index:10001;
+  background:#fff;
+  display:flex;flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .45s var(--ease);
+  overflow-y:auto;
+}
+.mob-menu.open{transform:none;}
+.mob-header{
+  display:flex;align-items:center;justify-content:flex-end;
+  padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.mob-close{
+  width:36px;height:36px;border-radius:var(--r);background:var(--surface2);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;color:var(--ink);transition:all .2s;
+  line-height:1;
+}
+.mob-close:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.mob-nav-list{padding:16px 20px;flex:1;}
+.mob-nav-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;border-radius:var(--r2);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;
+  color:var(--ink);letter-spacing:-.01em;
+  border:1px solid transparent;
+  transition:all .25s var(--ease2);
+  margin-bottom:6px;
+  text-decoration:none;
+  opacity:0;transform:translateX(20px);
+}
+.mob-menu.open .mob-nav-item{opacity:1;transform:none;}
+.mob-menu.open .mob-nav-item:nth-child(1){transition-delay:.05s;transition-duration:.35s;}
+.mob-menu.open .mob-nav-item:nth-child(2){transition-delay:.10s;transition-duration:.35s;}
+.mob-menu.open .mob-nav-item:nth-child(3){transition-delay:.15s;transition-duration:.35s;}
+.mob-menu.open .mob-nav-item:nth-child(4){transition-delay:.20s;transition-duration:.35s;}
+.mob-nav-item .mob-arrow{
+  width:28px;height:28px;border-radius:var(--r);background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:var(--muted);transition:all .25s;
+}
+.mob-nav-item:hover{background:var(--surface2);border-color:var(--border);color:var(--blue);}
+.mob-nav-item:hover .mob-arrow{background:var(--blue);color:#fff;}
+.mob-footer{padding:20px;border-top:1px solid var(--border);flex-shrink:0;}
+.mob-footer .btn{width:100%;justify-content:center;font-size:15px;padding:14px;}
+
+/* HERO BANNER */
+#hero{min-height:400px;display:flex !important;align-items:center;background-image:url('vacancybanner.jpeg');background-size:cover;background-position:center;background-repeat:no-repeat;position:relative;overflow:hidden;padding-top:64px;}
+#hero::before{content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,rgba(13,15,18,.85) 0%,rgba(28,32,51,.75) 100%);pointer-events:none;}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:32px;align-items:center;padding:40px 0;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:6px 16px 6px 10px;margin-bottom:16px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#60A5FA;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.7;transform:scale(1.2);}}
+.hero-badge-text{font-size:12px;font-weight:600;color:#fff;letter-spacing:.05em;text-transform:uppercase;}
+.hero-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,4.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#fff;margin-bottom:12px;}
+.hero-title span{color:#60A5FA;}
+.hero-subtitle{font-size:16px;color:rgba(255,255,255,.8);line-height:1.6;max-width:600px;margin:0 auto;font-weight:500;}
+@media(max-width:768px){
+  #hero{min-height:280px;padding:60px 0 40px;}
+  .hero-title{font-size:28px;}
+  .hero-subtitle{font-size:14px;}
+}
+
+/* UTILS */
+.c{max-width:1280px;margin:0 auto;padding:0 24px;}
+.sec{padding:108px 0;}
+.sec.alt{background:var(--surface2);}
+.ew{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+.sh{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,3.8vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin-bottom:16px;}
+.sh span{color:var(--blue);}
+.sd{font-size:16px;color:var(--ink);line-height:1.75;max-width:560px;font-weight:500;}
+.hdr{margin-bottom:64px;}.hdr.center{text-align:center;}.hdr.center .sd{margin:0 auto;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Geist',sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:var(--r);border:none;cursor:pointer;transition:all .25s var(--ease2);line-height:1;white-space:nowrap;}
+.bp{background:var(--blue);color:#fff;box-shadow:0 1px 2px rgba(28,107,255,.2);}
+.bp:hover{background:#1557E0;transform:translateY(-1px);box-shadow:0 6px 20px rgba(28,107,255,.35);}
+.bs{background:var(--surface);color:var(--ink);border:1px solid var(--border2);box-shadow:var(--s-xs);}
+.bs:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);box-shadow:var(--s-sm);}
+.bd{background:var(--ink);color:#fff;}
+.bd:hover{background:#1C2033;transform:translateY(-1px);box-shadow:0 6px 20px rgba(13,15,18,.3);}
+.btn-sm{padding:8px 16px;font-size:13px;}
+.btn-lg{padding:14px 28px;font-size:15px;}
+
+/* BADGES & TAGS */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:99px;}
+.bb{background:var(--blue-l);color:var(--blue);}
+.bt2{background:var(--teal-l);color:var(--teal);}
+.ba{background:var(--amber-l);color:var(--amber);}
+.br{background:#FEF2F2;color:var(--red);}
+.bg{background:#ECFDF5;color:var(--green);}
+.tag{font-size:12px;font-weight:500;padding:3px 10px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
+
+/* REVEAL */
+.rv{opacity:0;transition:opacity .7s var(--ease),transform .7s var(--ease);will-change:opacity,transform;}
+.rv.up{transform:translateY(28px);}.rv.lft{transform:translateX(-28px);}.rv.rgt{transform:translateX(28px);}.rv.sc{transform:scale(.97);}
+.rv.in{opacity:1;transform:none;}
+.d0{transition-delay:0s}.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* GLOBAL PLACEMENTS PREMIUM SLIDER */
+.gnf-section{
+  padding:100px 0 80px;
+  background:linear-gradient(150deg,#f0f7ff 0%,#e8f4fd 40%,#f0fafa 100%);
+  position:relative;overflow:hidden;
+}
+.gnf-section::before{
+  content:'';position:absolute;top:-120px;right:-120px;
+  width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(28,107,255,.07),transparent 70%);
+  pointer-events:none;
+}
+.gnf-hdr{text-align:center;margin-bottom:52px;}
+.gnf-hdr .ew{margin:0 auto 14px;}
+.gnf-hdr .sh{margin-bottom:0;}
+.gnf-hdr .sd{max-width:600px;margin:14px auto 0;color:var(--ink);}
+
+/* Track wrapper — clips overflow, enables snap */
+.gnf-viewport{
+  overflow:hidden;
+  cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
+  padding-bottom:4px;
+  touch-action:pan-y;
+}
+.gnf-viewport:active{cursor:grabbing;}
+
+.gnf-track{
+  display:flex;
+  gap:20px;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+  width:max-content;
+  padding:0;
+}
+
+/* Cards */
+.gnf-card{
+  flex:0 0 360px;
+  height:480px;
+  border-radius:24px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 8px 32px rgba(0,0,0,.16);
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;
+  animation:gnfFadeUp .6s var(--ease) both;
+  margin-right:0;
+}
+.gnf-card:last-child{margin-right:0;}
+.gnf-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 24px 64px rgba(0,0,0,.28);}
+
+/* stagger */
+.gnf-card:nth-child(1){animation-delay:.05s;}
+.gnf-card:nth-child(2){animation-delay:.12s;}
+.gnf-card:nth-child(3){animation-delay:.19s;}
+.gnf-card:nth-child(4){animation-delay:.26s;}
+.gnf-card:nth-child(5){animation-delay:.33s;}
+
+@keyframes gnfFadeUp{
+  from{opacity:0;transform:translateY(32px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* Background image with parallax layer */
+.gnf-img{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  transition:transform .6s cubic-bezier(.22,1,.36,1);
+  transform:scale(1.06);
+  display:block;
+  pointer-events:none;
+}
+.gnf-card:hover .gnf-img{transform:scale(1.12);}
+
+/* Dark gradient overlay */
+.gnf-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.08) 0%,
+    rgba(0,0,0,.18) 40%,
+    rgba(0,0,0,.72) 75%,
+    rgba(0,0,0,.88) 100%
+  );
+  z-index:1;
+}
+
+/* Arrow button top-right */
+.gnf-arrow-btn{
+  position:absolute;top:18px;right:18px;z-index:3;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1.5px solid rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:16px;font-weight:700;
+  transition:all .25s;
+  cursor:pointer;
+}
+.gnf-card:hover .gnf-arrow-btn{background:rgba(255,255,255,.3);transform:scale(1.08) rotate(-5deg);}
+
+/* Country label top-left */
+.gnf-country-badge{
+  position:absolute;top:18px;left:18px;z-index:3;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:99px;
+  padding:5px 12px 5px 8px;
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;color:#fff;
+  letter-spacing:.02em;
+}
+.gnf-flag{font-size:16px;line-height:1;}
+
+/* Text content */
+.gnf-content{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:24px 22px 26px;z-index:2;
+}
+.gnf-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:22px;font-weight:800;
+  color:#fff;letter-spacing:-.02em;
+  line-height:1.2;margin-bottom:8px;
+  text-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.gnf-sub{
+  font-size:13px;color:rgba(255,255,255,.82);
+  line-height:1.6;font-weight:500;
+  margin-bottom:14px;
+}
+.gnf-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:700;
+  color:#fff;letter-spacing:.04em;text-transform:uppercase;
+  background:rgba(28,107,255,.55);
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(28,107,255,.4);
+  padding:7px 14px;border-radius:99px;
+  transition:all .25s;
+}
+.gnf-card:hover .gnf-cta{background:var(--blue);box-shadow:0 4px 16px rgba(28,107,255,.5);}
+
+/* Nav row */
+.gnf-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:36px;position:relative;z-index:9999;}
+.gnf-nav-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--surface);border:1.5px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:18px;color:var(--ink);
+  transition:all .25s var(--ease2);box-shadow:var(--s-sm);
+  flex-shrink:0;
+  z-index:9999;
+  position:relative;
+  pointer-events:auto !important;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.gnf-nav-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 4px 16px rgba(28,107,255,.3);}
+.gnf-nav-btn:active{transform:scale(0.95);}
+.gnf-nav-btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+.gnf-dots{display:flex;gap:8px;align-items:center;}
+.gnf-dot{
+  width:8px;height:8px;border-radius:99px;
+  background:var(--border2);
+  transition:all .35s cubic-bezier(.22,1,.36,1);
+  cursor:pointer;border:none;padding:0;flex-shrink:0;
+  z-index:9999;
+  position:relative;
+}
+.gnf-dot.active{background:var(--blue);transform:scale(1.3);}
+.gnf-dot-mobile{display:none;}
+
+/* FOOTER */
+footer{background:var(--ink);padding:64px 0 32px;}
+.ftg{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07);}
+.ftb{font-size:14px;color:rgba(255,255,255,.4);line-height:1.75;max-width:280px;margin-top:12px;}
+.fsoc{display:flex;gap:10px;margin-top:20px;}
+.soc{width:36px;height:36px;border-radius:var(--r);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:13px;transition:all .25s;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;}
+.soc:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+.fct{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:16px;}
+.fcl{display:flex;flex-direction:column;gap:10px;}
+.fcl a{font-size:14px;color:rgba(255,255,255,.45);transition:color .2s;}
+.fcl a:hover{color:rgba(255,255,255,.9);}
+.fbt2{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px 0;}
+.fbt2 p{font-size:13px;color:rgba(255,255,255,.3);}
+.fbl{display:flex;gap:20px;}
+.fbl a{font-size:13px;color:rgba(255,255,255,.3);transition:color .2s;}
+.fbl a:hover{color:rgba(255,255,255,.7);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .ftg{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .nlinks,.btn-nav{display:none;}
+  .ham{display:flex;}
+  .sec{padding:72px 0;}
+  .gnf-section{padding:72px 0 60px;}
+  .gnf-card{flex:0 0 300px;height:420px;}
+  .gnf-nav-btn{width:38px;height:38px;}
+  .ftg{grid-template-columns:1fr;gap:28px;}
+  .fbt2{flex-direction:column;text-align:center;}
+  .gnf-dot-mobile{display:block;}
+}
+@media(max-width:480px){
+  .ftg{grid-template-columns:1fr;}
+  .gnf-card{flex:0 0 280px;height:400px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nw">
+    <a href="index.html" class="brand"><img src="ukrn logo.png" alt="UK RN Recruitment" style="height:200px;width:auto;display:block;margin:0;padding-bottom:15px;"></a>
+    <div class="nlinks">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="vacancies.html" class="active">Vacancies</a><a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="btn-nav apply-btn">Apply Now</a>
+    <button class="ham" id="ham"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <div class="mob-header">
+    <button class="mob-close" id="mobClose">✕</button>
+  </div>
+  <div class="mob-nav-list">
+    <a href="index.html" class="mob-nav-item ml">
+      Home
+      <span class="mob-arrow">→</span>
+    </a>
+    <a href="about.html" class="mob-nav-item ml">
+      About Us
+      <span class="mob-arrow">→</span>
+    </a>
+    <a href="vacancies.html" class="mob-nav-item ml">
+      Vacancies
+      <span class="mob-arrow">→</span>
+    </a>
+    <a href="contact.html" class="mob-nav-item ml">
+      Contact
+      <span class="mob-arrow">→</span>
+    </a>
+  </div>
+  <div class="mob-footer">
+    <a href="contact.html" class="btn bp btn-lg apply-btn" style="width:100%;justify-content:center;">Apply Now →</a>
+  </div>
+</div>
+
+<section id="hero" style="display:block !important;visibility:visible !important;opacity:1 !important;">
+  <div class="c">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <div class="dot"></div>
+          <span class="hero-badge-text">Vacancies</span>
+        </div>
+        <h1 class="hero-title">Explore <span>Global Opportunities</span></h1>
+        <p class="hero-subtitle">Discover exciting nursing positions across the UK and internationally. Your next career move starts here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD OPPORTUNITIES SECTION -->
+<section class="gnf-section" id="world-opportunities" style="padding-top:40px;">
+  <div class="c">
+    <div class="gnf-hdr rv up">
+      <div class="ew">Global Placements</div>
+      <h2 class="sh">Our <span>Global Reach</span></h2>
+      <p class="sd">Start your international career journey with placements in the world&apos;s leading healthcare systems.</p>
+    </div>
+
+    <div class="gnf-viewport" id="gnfViewport">
+      <div class="gnf-track" id="gnfTrack">
+
+        <!-- USA -->
+        <div class="gnf-card" onclick="window.location.href='contact.html'">
+          <img id="gnf-img-usa" class="gnf-img" src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&q=80" alt="Statue of Liberty, USA"/>
+          <div class="gnf-overlay"></div>
+          <div class="gnf-country-badge"><span class="gnf-flag">&#127482;&#127480;</span> United States</div>
+          <button class="gnf-arrow-btn" aria-label="Explore USA">&#8599;</button>
+          <div class="gnf-content">
+            <div class="gnf-title">Nursing Jobs in USA</div>
+            <p class="gnf-sub">Make your American Dream a reality with high-paying nursing opportunities.</p>
+            <div class="gnf-cta">Explore &#8594;</div>
+          </div>
+        </div>
+
+        <!-- UK -->
+        <div class="gnf-card" onclick="window.location.href='contact.html'">
+          <img id="gnf-img-uk" class="gnf-img" src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" alt="Big Ben and red bus, London UK"/>
+          <div class="gnf-overlay"></div>
+          <div class="gnf-country-badge"><span class="gnf-flag">&#127468;&#127463;</span> United Kingdom</div>
+          <button class="gnf-arrow-btn" aria-label="Explore UK">&#8599;</button>
+          <div class="gnf-content">
+            <div class="gnf-title">Nursing Jobs in UK</div>
+            <p class="gnf-sub">Join the NHS or top private healthcare facilities in the UK.</p>
+            <div class="gnf-cta">Explore &#8594;</div>
+          </div>
+        </div>
+
+        <!-- Germany -->
+        <div class="gnf-card" onclick="window.location.href='contact.html'">
+          <img id="gnf-img-germany" class="gnf-img" src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80" alt="Cathedral old town, Germany"/>
+          <div class="gnf-overlay"></div>
+          <div class="gnf-country-badge"><span class="gnf-flag">&#127465;&#127466;</span> Germany</div>
+          <button class="gnf-arrow-btn" aria-label="Explore Germany">&#8599;</button>
+          <div class="gnf-content">
+            <div class="gnf-title">Nursing Jobs in Germany</div>
+            <p class="gnf-sub">Enjoy high salaries, free language training and an incredible work-life balance.</p>
+            <div class="gnf-cta">Explore &#8594;</div>
+          </div>
+        </div>
+
+        <!-- Ireland -->
+        <div class="gnf-card" onclick="window.location.href='contact.html'">
+          <img id="gnf-img-ireland" class="gnf-img" src="https://images.unsplash.com/photo-1564959130747-897fb406b9af?w=800&q=80" alt="Castle and countryside, Ireland"/>
+          <div class="gnf-overlay"></div>
+          <div class="gnf-country-badge"><span class="gnf-flag">&#127470;&#127466;</span> Ireland</div>
+          <button class="gnf-arrow-btn" aria-label="Explore Ireland">&#8599;</button>
+          <div class="gnf-content">
+            <div class="gnf-title">Nursing Jobs in Ireland</div>
+            <p class="gnf-sub">Explore nursing opportunities in Ireland with GNF. We help you at every step.</p>
+            <div class="gnf-cta">Explore &#8594;</div>
+          </div>
+        </div>
+
+        <!-- GCC -->
+        <div class="gnf-card" onclick="window.location.href='contact.html'">
+          <img id="gnf-img-gcc" class="gnf-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" alt="Dubai Burj Khalifa skyline"/>
+          <div class="gnf-overlay"></div>
+          <div class="gnf-country-badge"><span class="gnf-flag">&#127757;</span> GCC</div>
+          <button class="gnf-arrow-btn" aria-label="Explore GCC">&#8599;</button>
+          <div class="gnf-content">
+            <div class="gnf-title">Nursing Jobs in GCC</div>
+            <p class="gnf-sub">Discover high-paying, tax-free nursing jobs in countries like UAE.</p>
+            <div class="gnf-cta">Explore &#8594;</div>
+          </div>
+        </div>
+
+      </div><!-- end track -->
+    </div><!-- end viewport -->
+
+    <p class="gnf-swipe-hint" style="text-align:center;font-size:13px;color:var(--muted);margin-top:24px;">&#8592; Swipe to explore countries &#8594;</p>
+
+    <div class="gnf-nav" style="position:relative;z-index:10000;">
+      <button class="gnf-nav-btn" id="gnfPrev" aria-label="Previous">&#8592;</button>
+      <div class="gnf-dots" id="gnfDots">
+        <button class="gnf-dot active" data-i="0"></button>
+        <button class="gnf-dot" data-i="1"></button>
+        <button class="gnf-dot" data-i="2"></button>
+        <button class="gnf-dot gnf-dot-mobile" data-i="3"></button>
+        <button class="gnf-dot gnf-dot-mobile" data-i="4"></button>
+      </div>
+      <button class="gnf-nav-btn" id="gnfNext" aria-label="Next">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="c">
+    <div class="ftg">
+      <div>
+        <a href="index.html" class="brand" style="color:#fff"><img src="ukrn logo.png" alt="UK RN Recruitment" style="height:150px;width:auto;display:block;margin:0;padding:0;"></a>
+        <p class="ftb">Premier healthcare recruitment agency connecting skilled nurses with life-changing opportunities across the UK and internationally.</p>
+        <div class="fsoc"><div class="soc">in</div><div class="soc">𝕏</div><div class="soc">f</div><div class="soc">ig</div></div>
+      </div>
+      <div><div class="fct">Company</div><div class="fcl"><a href="about.html">About Us</a><a href="index.html#why">Why Choose Us</a><a href="index.html#process">How It Works</a><a href="index.html#testimonials">Testimonials</a></div></div>
+      <div><div class="fct">For Nurses</div><div class="fcl"><a href="vacancies.html">View Vacancies</a><a href="contact.html">Apply Now</a><a href="#">Visa Support</a></div></div>
+      <div><div class="fct">Contact</div><div class="fcl"><a href="tel:+447454362823">+44 7454362823</a><a href="mailto:info@ukrnrecruitment.co.uk">info@ukrnrecruitment.co.uk</a><a href="#">66 Paul Street, London</a></div></div>
+    </div>
+    <div class="fbt2"><p>© 2026 UK RN Recruitment Ltd. Registered in England &amp; Wales. All rights reserved.</p><div class="fbl"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+// NAV
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+
+// HAMBURGER
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+function closeMob(){mob.classList.remove('open');ham.classList.remove('open');document.body.style.overflow='';}
+ham.addEventListener('click',()=>{const o=mob.classList.toggle('open');ham.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
+document.getElementById('mobClose').addEventListener('click',closeMob);
+document.querySelectorAll('.ml,.mob-footer .btn').forEach(el=>el.addEventListener('click',closeMob));
+
+// SCROLL REVEAL
+const rvObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
+
+// GNF GLOBAL PLACEMENTS SLIDER
+var gnfIdx = 0;
+var gnfCards = [];
+var gnfTrack = null;
+var gnfViewport = null;
+var gnfTimer = null;
+
+window.gnfNextClick = function(){ if(gnfTrack && gnfViewport){ gnfGoTo(gnfIdx + 1); gnfStartAuto(); }};
+window.gnfPrevClick = function(){ if(gnfTrack && gnfViewport){ gnfGoTo(gnfIdx - 1); gnfStartAuto(); }};
+window.gnfDotClick = function(cardIndex){ if(gnfTrack && gnfViewport){ gnfGoTo(cardIndex); gnfStartAuto(); }};
+
+document.addEventListener('DOMContentLoaded', function(){
+  gnfViewport = document.getElementById('gnfViewport');
+  gnfTrack    = document.getElementById('gnfTrack');
+  var dotBtns  = document.querySelectorAll('.gnf-dot');
+  if (!gnfTrack || !gnfViewport) return;
+
+  gnfCards  = Array.prototype.slice.call(gnfTrack.querySelectorAll('.gnf-card'));
+  var total  = gnfCards.length;
+  gnfIdx    = 0;
+  var timer  = null;
+  var dragX  = 0;
+  var isDrag = false;
+
+  function step() {
+    return gnfCards[0].getBoundingClientRect().width + 20;
+  }
+
+  function visible() {
+    return Math.max(1, Math.floor((gnfViewport.getBoundingClientRect().width + 20) / step()));
+  }
+
+  function maxIdx() {
+    return Math.max(0, gnfCards.length - visible());
+  }
+
+  function setDots(i) {
+    dotBtns.forEach(function(d,j){
+      var dotIndex = parseInt(d.getAttribute('data-i') || '0', 10);
+      d.classList.toggle('active', dotIndex === i);
+    });
+  }
+
+  function goTo(n) {
+    if (n < 0) n = gnfCards.length - 1;
+    if (n >= gnfCards.length) n = 0;
+    gnfIdx = n;
+    var cardWidth = gnfCards[0].getBoundingClientRect().width;
+    var gap = 20;
+    var totalTrackWidth = (cardWidth * gnfCards.length) + (gap * (gnfCards.length - 1));
+    var viewportWidth = gnfViewport.getBoundingClientRect().width;
+    var maxTranslate = Math.max(0, totalTrackWidth - viewportWidth);
+    var translate = Math.min(gnfIdx * (cardWidth + gap), maxTranslate);
+    gnfTrack.style.transition = 'transform .48s cubic-bezier(.22,1,.36,1)';
+    gnfTrack.style.transform  = 'translateX(-' + translate + 'px)';
+    setDots(gnfIdx);
+  }
+
+  function startAuto(){ stopAuto(); gnfTimer = setInterval(function(){ goTo(gnfIdx + 1); }, 4800); }
+  function stopAuto(){  clearInterval(gnfTimer); gnfTimer = null; }
+
+  window.gnfGoTo = goTo;
+  window.gnfVisible = visible;
+  window.gnfStartAuto = startAuto;
+
+  var btnNext = document.getElementById('gnfNext');
+  var btnPrev = document.getElementById('gnfPrev');
+  if (btnNext) {
+    btnNext.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); goTo(gnfIdx + 1); startAuto(); });
+    btnNext.addEventListener('touchend', function(e){ e.preventDefault(); e.stopPropagation(); goTo(gnfIdx + 1); startAuto(); });
+  }
+  if (btnPrev) {
+    btnPrev.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); goTo(gnfIdx - 1); startAuto(); });
+    btnPrev.addEventListener('touchend', function(e){ e.preventDefault(); e.stopPropagation(); goTo(gnfIdx - 1); startAuto(); });
+  }
+
+  dotBtns.forEach(function(d){
+    d.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var cardIndex = parseInt(d.getAttribute('data-i') || '0', 10);
+      goTo(cardIndex);
+      startAuto();
+    });
+  });
+
+  gnfViewport.addEventListener('mousedown', function(e){
+    isDrag = true; dragX = e.clientX;
+    gnfTrack.style.transition = 'none';
+    stopAuto();
+  });
+  document.addEventListener('mousemove', function(e){
+    if (!isDrag) return;
+    var dx = e.clientX - dragX;
+    gnfTrack.style.transform = 'translateX(' + dx + 'px)';
+  });
+  document.addEventListener('mouseup', function(e){
+    if (!isDrag) return;
+    isDrag = false;
+    var dx = e.clientX - dragX;
+    if (dx < -50) goTo(gnfIdx + 1);
+    else if (dx > 50) goTo(gnfIdx - 1);
+    else goTo(gnfIdx);
+    startAuto();
+  });
+
+  if ('ontouchstart' in window) {
+    gnfViewport.addEventListener('touchstart', function(e){
+      if (e.target.closest('.gnf-nav')) return;
+      dragX = e.touches[0].clientX;
+      stopAuto();
+    }, {passive:true});
+    gnfViewport.addEventListener('touchend',   function(e){
+      if (e.target.closest('.gnf-nav')) return;
+      var dx = e.changedTouches[0].clientX - dragX;
+      if (Math.abs(dx) > 40) {
+        if (dx < -40) goTo(gnfIdx + 1);
+        else if (dx > 40) goTo(gnfIdx - 1);
+      }
+      startAuto();
+    }, {passive:true});
+  }
+
+  gnfViewport.addEventListener('mouseenter', stopAuto);
+  gnfViewport.addEventListener('mouseleave', startAuto);
+
+  window.addEventListener('resize', function(){ goTo(gnfIdx); });
+
+  goTo(0);
+  startAuto();
+});
+</script>
+</body>
+</html>
