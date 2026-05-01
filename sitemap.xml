@@ -28,4 +28,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Employer Page -->
+  <url>
+    <loc>https://ukrnrecruitment.co.uk/employeer.html</loc>
+    <lastmod>2024-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
